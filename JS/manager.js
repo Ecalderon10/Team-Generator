@@ -1,7 +1,9 @@
-const validator = require("validator");
+const employee = require("./employee.js");
 
-class Employee {
-  constructor(name, id, email) {
+class Employee extends employee {
+  constructor(name, id, email, officeNumber) {
+    super(name, id, email);
+
     if (typeof name !== "string" || !name.trim().length) {
       throw new Error("Expect parameter 'name' to be a non-empty string");
     }
@@ -13,6 +15,13 @@ class Employee {
     if (validator.isEmail(email) == false) {
       throw new Error("Expected parameter 'email' to be a non-empty string");
     }
+
+    if (typeof id !== "number" || isNaN(id) || officeNumber < 0) {
+      throw new Error(
+        "Expected parameter 'officeNumber' to be a non-negative number"
+      );
+    }
+
     this.name = name;
     this.id = id;
     this.email = email;
@@ -30,8 +39,12 @@ class Employee {
   getEmail() {
     return this.email;
   }
+  getOfficeNumber() {
+    return this.officeNumber;
+  }
 
   getRole() {
     return "manager";
   }
 }
+module.exports = Manager;

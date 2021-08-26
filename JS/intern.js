@@ -1,7 +1,9 @@
-const validator = require("validator");
+const employee = require("./employee.js");
 
-class Intern {
-  constructor(name, id, email) {
+class Intern extends employee {
+  constructor(name, id, email, school) {
+    super(name, id, email);
+
     if (typeof name !== "string" || !name.trim().length) {
       throw new Error("Expect parameter 'name' to be a non-empty string");
     }
@@ -14,8 +16,8 @@ class Intern {
       throw new Error("Expected parameter 'email' to be a non-empty string");
     }
 
-    if (typeof school !== "string" || !name.trim().length) {
-      throw new Error("Expect parameter 'name' to be a non-empty string");
+    if (typeof school !== "string" || !school.trim().length) {
+      throw new Error("Expect parameter 'school' to be a non-empty string");
     }
 
     this.name = name;
@@ -44,3 +46,4 @@ class Intern {
     return "Intern";
   }
 }
+module.exports = Intern;
