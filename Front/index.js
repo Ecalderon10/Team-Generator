@@ -3,8 +3,12 @@ const fs = require("fs");
 const Engineer = require("../JS/engineer");
 const Manager = require("../JS/Manager");
 const Intern = require("../JS/Intern");
+const { finished } = require("stream");
 
 const htmlrequest = [];
+const membersarray = [];
+let spec;
+let cardGenHtml = "";
 
 initiateQuestions = () => {
   inquirer
@@ -101,7 +105,19 @@ function managerQuestions() {
         managerAnswers.managerEmail,
         managerAnswers.managerOffice
       );
-      htmlrequest.push(newManager);
+      membersarray.push(newManager);
+
+      if (
+        managerAnswers.nextMember === "No other team members are neccassary"
+      ) {
+        cardGenerator();
+      } else if (managerAnswers.nextMember === "Intern") {
+        internQuestions();
+      } else if (managerAnswers.nextMember === "Engineer") {
+        engineerQuestions();
+      } else {
+        managerQuestions();
+      }
     });
 }
 
@@ -140,16 +156,28 @@ function engineerQuestions() {
         ],
       },
     ])
-    .then((engineerAnswers) => {
-      console.log(engineerAnswers);
+    .then((EngineerAnswers) => {
+      console.log(EngineerAnswers);
       //generateHtml();
       const newEngineer = new Engineer(
-        engineerAnswers.engineerName,
-        engineerAnswers.engineerId,
-        engineerAnswers.engineerEmail,
-        engineerAnswers.engineerUser
+        EngineerAnswers.engineerName,
+        EngineerAnswers.engineerId,
+        EngineerAnswers.engineerEmail,
+        EngineerAnswers.engineerUser
       );
-      htmlrequest.push(newEngineer);
+      membersarray.push(newEngineer);
+
+      if (
+        EngineerAnswers.nextMember === "No other team members are neccassary"
+      ) {
+        cardGenerator();
+      } else if (EngineerAnswers.nextMember === "Manager") {
+        managerQuestions();
+      } else if (EngineerAnswers.nextMember === "Intern") {
+        internQuestions();
+      } else {
+        engineerQuestions();
+      }
     });
 }
 
@@ -192,17 +220,70 @@ function internQuestions() {
       console.log(InternAnswers);
 
       const newIntern = new Intern(
-        internAnswers.internName,
-        internAnswers.internId,
-        internAnswers.internEmail,
-        internAnswers.internSchool
+        InternAnswers.internName,
+        InternAnswers.internId,
+        InternAnswers.internEmail,
+        InternAnswers.internSchool
       );
-      htmlrequest.push(newIntern);
+      membersarray.push(newIntern);
+
+      if (InternAnswers.nextMember === "No other team members are neccassary") {
+        cardGenerator();
+      } else if (InternAnswers.nextMember === "Manager") {
+        managerQuestions();
+      } else if (InternAnswers.nextMember === "Engineer") {
+        engineerQuestions();
+      } else {
+        internQuestions();
+      }
     });
 }
 
+function cardGenerator() {
+  console.log(membersarray);
+  membersarray.map((answers) => {
+    if (answers.getRole() === "Engineer") {
+      spec = `Github: <a href="${answers.getGitHub()}>"${answers.getGitHub()}</a>`;
+    } else if (answers.getRole() === "Manager") {
+      spec = `Office Number: ${answers.getOfficeNumber()}`;
+    } else {
+      spec = `School: ${answers.getSchool()}`;
+    }
+
+    cardGenHtml += `
+    <div class="card">
+    <section class="card-body">
+      <h5 class="card-title">Team Members</h5>
+        <p class="card-text">
+          <ul>
+            <li>${answers.getName()}</li>
+            <li>${answers.getRole()}</li>
+            <li>${answers.getId()}</li>
+            <li>${answers.getEmail()}</li>
+            <li>${spec}</li>
+          </ul>
+        </p>
+    </section>
+    </div>
+    
+    `;
+  });
+  generateHtml();
+}
+
 function generateHtml() {
-  fs.writeFile("index.html", htmlrequest, (err) => {
+  fs.appendFile("index.html", cardGenHtml, (err) => {
+    err ? console.log("error") : console.log(`success`);
+  });
+  allDone();
+}
+
+function allDone() {
+  const finalCode = `</div>
+</body>
+</html>
+`;
+  fs.appendFile("index.html", finalCode, (err) => {
     err ? console.log("error") : console.log(`success`);
   });
 }
