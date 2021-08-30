@@ -253,7 +253,7 @@ function cardGenerator() {
     cardGenHtml += `
     <div class="card">
     <section class="card-body">
-      <h5 class="card-title">Team Members</h5>
+      <h5 class="card-title">Team Member</h5>
         <p class="card-text">
           <ul>
             <li>${answers.getName()}</li>
