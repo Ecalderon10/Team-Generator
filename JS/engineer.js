@@ -4,9 +4,6 @@ class Engineer extends employee {
   constructor(name, id, email, gitUser) {
     super(name, id, email);
 
-    this.name = name;
-    this.id = id;
-    this.email = email;
     this.gitUser = gitUser;
   }
 

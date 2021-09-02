@@ -4,9 +4,6 @@ class Intern extends employee {
   constructor(name, id, email, school) {
     super(name, id, email);
 
-    this.name = name;
-    this.id = id;
-    this.email = email;
     this.school = school;
   }
 

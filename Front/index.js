@@ -81,7 +81,7 @@ function managerQuestions() {
       },
       {
         type: "input",
-        name: "mangerOfficeNumber",
+        name: "managerOfficeNumber",
         message: "What is your office number?",
       },
       {
@@ -103,7 +103,7 @@ function managerQuestions() {
         managerAnswers.managerName,
         managerAnswers.managerId,
         managerAnswers.managerEmail,
-        managerAnswers.managerOffice
+        managerAnswers.managerOfficeNumber
       );
       membersarray.push(newManager);
 
@@ -131,12 +131,12 @@ function engineerQuestions() {
       },
       {
         type: "input",
-        name: "enginnerId",
+        name: "engineerId",
         message: "What would you like your ID to be?",
       },
       {
         type: "input",
-        name: "enginnerEmail",
+        name: "engineerEmail",
         message: "What is your Email?",
       },
       {
@@ -163,7 +163,7 @@ function engineerQuestions() {
         EngineerAnswers.engineerName,
         EngineerAnswers.engineerId,
         EngineerAnswers.engineerEmail,
-        EngineerAnswers.engineerUser
+        EngineerAnswers.engineerGitUser
       );
       membersarray.push(newEngineer);
 
@@ -243,7 +243,7 @@ function cardGenerator() {
   console.log(membersarray);
   membersarray.map((answers) => {
     if (answers.getRole() === "Engineer") {
-      spec = `Github: <a href="${answers.getGitHub()}>"${answers.getGitHub()}</a>`;
+      spec = `Github: <a href="${answers.getGitHub()}">${answers.getGitHub()}</a>`;
     } else if (answers.getRole() === "Manager") {
       spec = `Office Number: ${answers.getOfficeNumber()}`;
     } else {
@@ -270,6 +270,18 @@ function cardGenerator() {
   });
   generateHtml();
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function generateHtml() {
   fs.appendFile("index.html", cardGenHtml, (err) => {
