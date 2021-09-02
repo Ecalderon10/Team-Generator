@@ -41,13 +41,5 @@ describe("Engineer", () => {
         expect(role).toEqual("Engineer");
       });
     });
-
-    describe("getGitHub()", () => {
-      it("Should throw an error if an email is not an email", () => {
-        const eng = new Engineer("Bob", 123, "B@yahoo.com","Bob10");
-        const github = eng.getGitHub();
-        expect(github).toEqual("Bob10");
-      });
-    });
   });
 });
