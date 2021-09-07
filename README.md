@@ -1,10 +1,10 @@
 # Team-Generator
+
 <img width="987" alt="Screen Shot 2021-09-01 at 9 34 21 PM" src="https://user-images.githubusercontent.com/87398458/131777676-f2f3548d-d6ca-44e6-abed-4341dc3f3684.png">
 
 ##Description
 
 This application was built to help any employeer document their employees with the proper credintials being entered pertaining to the proper employee.
-
 
 1. When first approaching this projecct I started off with building out the test for each individual employee
 
@@ -24,7 +24,6 @@ This application was built to help any employeer document their employees with t
 
 9. Finally I wrote out the proper functions to append all the info into the html once the employeer had selected that they wished not to add anymore employees to the team generator
 
+###LINK TO OPERATING SYSTEM
 
-
-
-
+https://drive.google.com/file/d/1ThbjGtZIVqHDOGw_zah-LHq66gMtj-vs/view
