@@ -24,6 +24,6 @@ This application was built to help any employeer document their employees with t
 
 9. Finally I wrote out the proper functions to append all the info into the html once the employeer had selected that they wished not to add anymore employees to the team generator
 
-###LINK TO OPERATING SYSTEM
+LINK TO VIDEO OF OPERATING APPLICATION
 
 https://drive.google.com/file/d/1ThbjGtZIVqHDOGw_zah-LHq66gMtj-vs/view
